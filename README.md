@@ -36,4 +36,4 @@ To test the code and execute the necessary commands, follow these steps:
 
 Make sure you have Python and prerequisite libraries installed and that your environment is set up correctly to run this test script.
 
-**Note:** This project is intended for hobby and learning purposes only. It is not meant for commercial use or production environments.Z
+**Note:** This project is intended for hobby and learning purposes only. It is not meant for commercial use or production environments.
