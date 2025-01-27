@@ -1,26 +1,39 @@
-# WAND-Top-k-Retrieval-Algorithm
-This is a python implementation of the WAND algorithm presented in the [Exploring the Magic of WAND](http://culpepper.io/publications/pcm13-adcs.pdf) paper. The algorithm is used top-k retrieval in web search
-## Usage: 
-For testing
+# Modified WAND Retrieval Algorithm with UCB-based Adaptive thresholding
 
-> `python3 tc[1-4].py`
+This is a Python implementation of the Modified WAND algorithm with UCB-based adaptive thresholding.
 
-A query is made by calling
+## Why UCB for the WAND Algorithm?
 
-> `WAND_Algo(query_terms, top_k, inverted_index)`
-### Inputs:
-`query_terms` is a list of strings, `top_k` is an integer >= 1 and `inverted_index` is a dictionary with key : term; value : list of tuples [(doc_id, weight)]
+The UCB-based adaptive threshold adjustment algorithm can be integrated with the WAND algorithm to improve the efficiency of threshold tuning during the query evaluation phase. In WAND, the threshold (θ) plays a critical role in determining which documents make it to the top-k list, directly impacting pruning efficiency. UCB can help dynamically adjust this threshold based on feedback, thereby improving retrieval performance.
 
-The inverted index model `InvertedIndex(documents).get_inverted_index()` accepts a document as input (a dictionary with with key: doc_id and value: document text and returns the `inverted_index`
+## Where UCB Fits in the WAND Algorithm
 
-No preprocessing methods are used, only `split` to get terms.
+### 1. Threshold Initialization and Adjustment
 
-The normalized tf-idf is calculated in `Inv_index.py` from the formula:
-![](https://raw.githubusercontent.com/Jon-bon-Jono/WAND-Top-k-Retrieval-Algorithm/main/tf_idf_formula.PNG)
+Currently, the WAND algorithm initializes θ to −∞ and updates it when the top-k list is full. UCB can dynamically adjust θ throughout the query evaluation process based on the distribution of document scores and observed rewards.
 
-### Output:
-Outputs a list of the form (score, doci_id) where score corresponds to the sum of tf-idf scores among all the term based on the intersection of the query and document. Also outputs full_evaluation_count, the number of documents fully evaluated in the WAND algorithm
+### 2. Candidate Selection Efficiency
+
+The UCB-based algorithm adjusts θ to balance exploring additional candidates and focusing on promising ones.
+
+### 3. Pivot Document Processing
+
+The pivot determination loop evaluates document candidates to decide the evaluation order. UCB can enhance this step by incorporating a dynamic policy for scoring candidates relative to their impact on θ.
+
+## How to Test the Code
+
+To test the code and execute the necessary commands, follow these steps:
+
+1. **Download and Unzip Data**:
+- Ensure you have your `download.sh` script ready and open your terminal (Linux/Mac/WSL).
+
+2. **Make the Script Executable**:
+    `chmod +x download.sh`
+
+3. **Trigger the downloads**:
+    `./download.sh`
 
 
+Make sure you have Python and prerequisite libraries installed and that your environment is set up correctly to run this test script.
 
-
+**Note:** This project is intended for hobby and learning purposes only. It is not meant for commercial use or production environments.Z
